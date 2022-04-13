@@ -11,7 +11,6 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 50px;
     background-color: white;
 }
     .top img{
@@ -20,6 +19,8 @@ body{
     }
     .top ion-icon{
         margin-right: 8%;
+
+       font-size: 50px;
     }
 .content{
     margin-top: 106px;
@@ -60,6 +61,23 @@ body{
     height:80px;
     width:100%;
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
-
     background-color: white;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
 }
+    .bottom input{
+        margin-left: 8%;
+        border-style: none;
+        font-family: 'Roboto';
+        font-style: italic;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+    }
+    .bottom ion-icon{
+        margin-right: 8%;
+        font-size: 30px;
+    }
