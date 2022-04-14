@@ -1,13 +1,10 @@
 function initializeMessages(){
     logIn(prompt("Por favor insira seu lindo nome"));
-
-    requestMessages();
-    setInterval(requestMessages,3000)
 }
 function logIn(userName){
     const logInObject = {name: userName }
     const promisse=axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",logInObject);
-    promisse.then(requestMessages);
+    promisse.then(logInSucces(logInObject));
     promisse.catch(logInError);
 }
 function logInError(error){
@@ -18,11 +15,15 @@ function logInError(error){
         alert(`ERRO! Código: ${error.response.status} Mensagem: ${error.response.data}`)
     }
 }
-
-function requestMessages(){
+function logInSucces(userNameObject){
+    requestMessages(userNameObject);
+    setInterval(requestMessages,3000,userNameObject)
+}
+function requestMessages(name){
     const promisse= axios.get("https://mock-api.driven.com.br/api/v6/uol/messages")
     promisse.then(updateMessages);
     promisse.catch(catchError);
+    axios.post("https://mock-api.driven.com.br/api/v6/uol/status", name).then(console.log,console.log) 
 }
 function updateMessages(messageLog){
     const content= document.querySelector(".content");
@@ -30,7 +31,6 @@ function updateMessages(messageLog){
     for(let messageNum=0;messageNum<messageLog.data.length;messageNum++){
         const newMessage=document.createElement("div");
         const messageData = messageLog.data[messageNum];
-        console.log(messageData);
         if(messageData.type === "message"){
             newMessage.classList.add("message");
             newMessage.innerHTML=`<span class="timeText">(${messageData.time})</span>\u2002
