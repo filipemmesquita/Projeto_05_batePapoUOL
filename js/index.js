@@ -1,7 +1,24 @@
 function initializeMessages(){
+    logIn(prompt("Por favor insira seu lindo nome"));
+
     requestMessages();
     setInterval(requestMessages,3000)
 }
+function logIn(userName){
+    const logInObject = {name: userName }
+    const promisse=axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",logInObject);
+    promisse.then(requestMessages);
+    promisse.catch(logInError);
+}
+function logInError(error){
+    if(error.response.status=="400"){
+        logIn(prompt("Este nome está em uso! insira outro"));
+    }
+    else{
+        alert(`ERRO! Código: ${error.response.status} Mensagem: ${error.response.data}`)
+    }
+}
+
 function requestMessages(){
     const promisse= axios.get("https://mock-api.driven.com.br/api/v6/uol/messages")
     promisse.then(updateMessages);
