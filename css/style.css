@@ -24,10 +24,9 @@ body{
     }
 .content{
     margin-top: 106px;
-    
+    margin-bottom: 84px;
 }
     .content div{
-        
         border-radius: 2px;
         font-family: 'Roboto';
         font-style: normal;
