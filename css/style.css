@@ -26,26 +26,29 @@ body{
     margin-top: 106px;
     
 }
-    .message{
-        height: 20px;
+    .content div{
+        
         border-radius: 2px;
         font-family: 'Roboto';
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
-        line-height: 16px;
-        display: flex;
+        line-height: 20px;
         align-items: center;
         margin-bottom: 4px;
-        background-color: white;
         padding:10px;
         width: 100%;
+        word-wrap: break-word;
+        
     }
     .status{
         background-color: #DCDCDC;
     }
-    .whisper{
+    .private_message{
         background-color: #FFDEDE;
+    }
+    .message{
+        background-color: white;
     }
     .timeText{
         color: #AAAAAA;
