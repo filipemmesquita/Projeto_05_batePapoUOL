@@ -119,5 +119,32 @@ body{
     right:-83%;
     transition: right 0.5s;
     background-color: white;
+    padding-top: 15px;
     z-index: 2;
 }
+    .sidebarContent h1{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin:21px 44px;
+    }
+    .sidebarContent label{
+        margin-left:18px;
+        margin-bottom:15px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+    }
+    .sidebarContent ion-icon{
+        font-size:30px;
+        margin-right:10px;
+    }

@@ -127,7 +127,7 @@ function updateParticipants(participants){
     for(let i=0;i<participants.data.length;i++){
         const newParticipant=document.createElement("div");
         newParticipant.innerHTML=`
-            <label onclick="setSendText()">${participants.data[i].name}
+            <label onclick="setSendText()"><ion-icon name="person-circle"></ion-icon>${participants.data[i].name}
             <input type="radio" name="messageTo" value="${participants.data[i].name}" />
             </label>`
         participantList.appendChild(newParticipant);

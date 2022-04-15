@@ -24,16 +24,15 @@
     <div class="sidebar" onclick="closeSidebar()"></div>
     <div class="sidebarContent">
       <h1>Escolha um contato para enviar mensagem:</h1>
-      
-        <div><label onclick="setSendText()">Todos
+        <div><label onclick="setSendText()"><ion-icon name="people"></ion-icon>Todos
           <input type="radio" checked="checked" name="messageTo" value="Todos" />
         </label></div>
         <div class="participantList"></div>        
       <h1>Escolha a visibilidade:</h1>  
-        <label onclick="setSendText()">Público
+        <label onclick="setSendText()"><ion-icon name="lock-open"></ion-icon>Público
           <input type="radio" checked="checked" name="messageType" value="message" />
         </label>
-        <label onclick="setSendText()">Reservadamente
+        <label onclick="setSendText()"><ion-icon name="lock-open"></ion-icon>Reservadamente
           <input type="radio" name="messageType" value="private_message" />
         </label>
     </div>
