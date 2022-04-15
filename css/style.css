@@ -23,8 +23,11 @@ body{
        font-size: 50px;
     }
 .content{
-    margin-top: 106px;
-    margin-bottom: 84px;
+    width:100%;
+    height:100%;
+    padding-top: 106px;
+    padding-bottom: 84px;
+    box-sizing: border-box;
 }
     .content div{
         border-radius: 2px;
@@ -38,7 +41,7 @@ body{
         padding:10px;
         width: 100%;
         word-wrap: break-word;
-        
+        box-sizing: border-box;
     }
     .status{
         background-color: #DCDCDC;
@@ -60,26 +63,61 @@ body{
     position: fixed;
     bottom:0;
     left:0;
-    height:80px;
+    height:84px;
     width:100%;
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
     background-color: white;
     display:flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    padding-top:15px;
+    box-sizing: border-box;
 }
     .bottom input{
-        margin-left: 8%;
+        margin-left: 5%;
         border-style: none;
         font-family: 'Roboto';
         font-style: italic;
         font-weight: 400;
         font-size: 18px;
-        line-height: 21px;
         display: flex;
-        align-items: center;
+        color:black;
+
     }
     .bottom ion-icon{
-        margin-right: 8%;
+        margin-right: 5%;
         font-size: 30px;
+        justify-self: right;
     }
+    .bottom span{
+        margin-left:5%;
+        color:#505050;
+        font-family: 'Roboto';
+        font-size: 12px;
+        font-weight: 300;
+        flex-basis:100%;
+
+    }
+.sidebar{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+.sidebarContent{
+    display:flex;
+    flex-direction: column;
+    width:83%;
+    height:100%;
+    position:fixed;
+    top:0;
+    right:-83%;
+    transition: right 0.5s;
+    background-color: white;
+    z-index: 2;
+}

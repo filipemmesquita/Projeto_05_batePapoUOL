@@ -66,12 +66,14 @@ function catchError(erro) {
 }
 function requestSendMessage(){
     const messageField =document.querySelector(".bottom input");
+    const messageTo= document.querySelector(`input[type="radio"][name=messageTo]:checked`).value;
+    const messageType= document.querySelector(`input[type="radio"][name=messageType]:checked`).value;
     if(messageField.value){
         const messageObject ={
             from: nameGlobal.name,
-            to: "Todos",
+            to: messageTo,
             text: messageField.value,
-            type: "message"
+            type: messageType
         }
         const promisse = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", messageObject)
         promisse.then(sendMessageSuccess)
@@ -81,4 +83,25 @@ function requestSendMessage(){
 }
 function sendMessageSuccess(){
     requestMessages();
+}
+function openSidebar(){
+    document.querySelector(".sidebar").style.display="initial";
+    document.querySelector(".sidebarContent").style.right="0";
+    console.log("aaaaa")
+}
+function closeSidebar(){
+    document.querySelector(".sidebar").style.display="none";
+    document.querySelector(".sidebarContent").style.right="-83%";
+}
+function setSendText(){
+    const messageTo= document.querySelector(`input[type="radio"][name=messageTo]:checked`).value;
+    const messageType= document.querySelector(`input[type="radio"][name=messageType]:checked`).value;
+    let messageTypeText="";
+    if(messageType==="message"){
+        messageTypeText="Público";
+    }
+    else{
+        messageTypeText="Reservadamente";
+    }
+    document.querySelector(".bottom span").innerText=`Enviando para ${messageTo} (${messageTypeText})`;
 }
