@@ -19,14 +19,17 @@ function logInError(error){
 }
 function logInSucces(userNameObject){
     nameGlobal=userNameObject;
+    requestMessages();
     setInterval(requestMessages,3000);
+    requestUsers();
+    setInterval(requestUsers, 10000);
 }
 //requestMessages também mantem o usuario conectado
 function requestMessages(){
     const promisse= axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
     promisse.then(updateMessages);
     promisse.catch(catchError);
-    axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nameGlobal).then(console.log,console.log); 
+    axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nameGlobal); 
 }
 function updateMessages(messageLog){
     const content= document.querySelector(".content");
@@ -66,8 +69,8 @@ function catchError(erro) {
 }
 function requestSendMessage(){
     const messageField =document.querySelector(".bottom input");
-    const messageTo= document.querySelector(`input[type="radio"][name=messageTo]:checked`).value;
-    const messageType= document.querySelector(`input[type="radio"][name=messageType]:checked`).value;
+    const messageTo= document.querySelector(`input[type="radio"][name="messageTo"]:checked`).value;
+    const messageType= document.querySelector(`input[type="radio"][name="messageType"]:checked`).value;
     if(messageField.value){
         const messageObject ={
             from: nameGlobal.name,
@@ -94,8 +97,8 @@ function closeSidebar(){
     document.querySelector(".sidebarContent").style.right="-83%";
 }
 function setSendText(){
-    const messageTo= document.querySelector(`input[type="radio"][name=messageTo]:checked`).value;
-    const messageType= document.querySelector(`input[type="radio"][name=messageType]:checked`).value;
+    const messageTo= document.querySelector(`input[type="radio"][name="messageTo"]:checked`).value;
+    const messageType= document.querySelector(`input[type="radio"][name="messageType"]:checked`).value;
     let messageTypeText="";
     if(messageType==="message"){
         messageTypeText="Público";
@@ -104,4 +107,46 @@ function setSendText(){
         messageTypeText="Reservadamente";
     }
     document.querySelector(".bottom span").innerText=`Enviando para ${messageTo} (${messageTypeText})`;
+}
+function requestUsers(){
+    const promisse=axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+    promisse.then(updateParticipants);
+    promisse.catch(catchError);
+}
+function updateParticipants(participants){
+    let selectedParticipant;
+    //checa se alguma opção está marcada e armazena
+    if(document.querySelectorAll(`input[name="messageTo"]:checked`).length!==0){
+        selectedParticipant =document.querySelector(`input[name="messageTo"]:checked`).value;
+    }
+    else{
+        selectedParticipant=null;
+    }
+    const participantList=document.querySelector(".participantList");
+    participantList.innerHTML="";
+    for(let i=0;i<participants.data.length;i++){
+        const newParticipant=document.createElement("div");
+        newParticipant.innerHTML=`
+            <label onclick="setSendText()">${participants.data[i].name}
+            <input type="radio" name="messageTo" value="${participants.data[i].name}" />
+            </label>`
+        participantList.appendChild(newParticipant);
+    }
+    //se nenhuma opção estava marcada, marca todos    
+    if(selectedParticipant===null){
+        document.querySelector(`input[value="Todos"]`).checked=true;
+        setSendText();
+    }
+    //se alguma opção estava marcada, checa se a mesma ainda existe e a marca
+    else if(document.querySelectorAll(`input[value="${selectedParticipant}"]`).length!==0){
+        document.querySelector(`input[value="${selectedParticipant}"]`).checked=true;
+        setSendText();
+    }
+    //se alguma opção estava marcada porém não existe mais
+    else{
+        document.querySelector(`input[value="Todos"]`).checked=true;
+        setSendText();
+    }
+//essa solução não é semantica nem legível, porém foi o que deu
+//essa bagunça é para que no caso de atualizar a lista de usuários, se o usuário selecionado tiver saído
 }

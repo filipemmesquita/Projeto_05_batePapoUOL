@@ -24,11 +24,18 @@
     <div class="sidebar" onclick="closeSidebar()"></div>
     <div class="sidebarContent">
       <h1>Escolha um contato para enviar mensagem:</h1>
-        <label onclick="setSendText()">Todos<input type="radio" checked="checked" name="messageTo" value="Todos" /></label>        
-        <label onclick="setSendText()">Maria<input type="radio" name="messageTo" value="Maria" /></label>
+      
+        <div><label onclick="setSendText()">Todos
+          <input type="radio" checked="checked" name="messageTo" value="Todos" />
+        </label></div>
+        <div class="participantList"></div>        
       <h1>Escolha a visibilidade:</h1>  
-        <label onclick="setSendText()">Público<input type="radio" checked="checked" name="messageType" value="message" /></label>
-        <label onclick="setSendText()">Reservadamente<input type="radio" name="messageType" value="private_message" /></label>
+        <label onclick="setSendText()">Público
+          <input type="radio" checked="checked" name="messageType" value="message" />
+        </label>
+        <label onclick="setSendText()">Reservadamente
+          <input type="radio" name="messageType" value="private_message" />
+        </label>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/index.js"></script>
