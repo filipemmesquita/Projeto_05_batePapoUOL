@@ -121,6 +121,11 @@ body{
     background-color: white;
     padding-top: 15px;
     z-index: 2;
+    overflow: scroll;
+}
+form{
+    justify-content: left;
+    flex-wrap: wrap;
 }
     .sidebarContent h1{
         font-family: 'Roboto';
@@ -128,7 +133,7 @@ body{
         font-weight: 700;
         font-size: 16px;
         line-height: 19px;
-        display: flex;
+        display: block;
         align-items: center;
         text-align: center;
         margin:21px 44px;
@@ -141,10 +146,27 @@ body{
         font-weight: 400;
         font-size: 16px;
         line-height: 19px;
-        display: flex;
         align-items: center;
+        display:flex;
+        width:100%
+
     }
     .sidebarContent ion-icon{
         font-size:30px;
         margin-right:10px;
     }
+    .sidebarContent input {
+        display:none;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    .checkmark{
+        visibility: hidden;
+        font-size: 15px;
+        color:green;
+    }
+    .sidebarContent input:checked ~ .checkmark {
+       visibility:visible;
+      }

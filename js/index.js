@@ -23,6 +23,7 @@ function logInSucces(userNameObject){
     setInterval(requestMessages,3000);
     requestUsers();
     setInterval(requestUsers, 10000);
+    document.querySelector(`.texto`).addEventListener("keydown", keypressEnter);
 }
 //requestMessages também mantem o usuario conectado
 function requestMessages(){
@@ -66,6 +67,11 @@ function updateMessages(messageLog){
 }
 function catchError(erro) {
 	console.log("Erro " + erro.response.statuss);
+}
+function keypressEnter(pressedkey){
+if(pressedkey.code==="Enter"){
+    requestSendMessage();
+    }
 }
 function requestSendMessage(){
     const messageField =document.querySelector(".bottom input");
@@ -129,6 +135,7 @@ function updateParticipants(participants){
         newParticipant.innerHTML=`
             <label onclick="setSendText()"><ion-icon name="person-circle"></ion-icon>${participants.data[i].name}
             <input type="radio" name="messageTo" value="${participants.data[i].name}" />
+            <ion-icon class="checkmark" name="checkmark-outline"></ion-icon>
             </label>`
         participantList.appendChild(newParticipant);
     }

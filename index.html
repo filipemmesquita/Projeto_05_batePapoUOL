@@ -18,23 +18,29 @@
     <div class="content">
     </div>
     <div class="bottom">
-        <input type="text" placeholder="Escreva aqui..." /> <ion-icon name="paper-plane-outline" onclick="requestSendMessage()"></ion-icon>
+        <input type="text" class="texto" placeholder="Escreva aqui..." /> <ion-icon name="paper-plane-outline" onclick="requestSendMessage()"></ion-icon>
         <span>Enviando para Todos (Público)</span>
     </div>
     <div class="sidebar" onclick="closeSidebar()"></div>
     <div class="sidebarContent">
       <h1>Escolha um contato para enviar mensagem:</h1>
-        <div><label onclick="setSendText()"><ion-icon name="people"></ion-icon>Todos
+        <form><div><label onclick="setSendText()"><ion-icon name="people"></ion-icon>Todos
           <input type="radio" checked="checked" name="messageTo" value="Todos" />
+          <ion-icon class="checkmark" name="checkmark-outline"></ion-icon>
         </label></div>
-        <div class="participantList"></div>        
+        <span class="participantList"></span>    
+        </form>    
       <h1>Escolha a visibilidade:</h1>  
+        <form>
         <label onclick="setSendText()"><ion-icon name="lock-open"></ion-icon>Público
           <input type="radio" checked="checked" name="messageType" value="message" />
+          <ion-icon class="checkmark" name="checkmark-outline"></ion-icon>
         </label>
         <label onclick="setSendText()"><ion-icon name="lock-open"></ion-icon>Reservadamente
           <input type="radio" name="messageType" value="private_message" />
+          <ion-icon class="checkmark" name="checkmark-outline"></ion-icon>
         </label>
+        </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/index.js"></script>
