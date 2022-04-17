@@ -15,10 +15,22 @@
     <div class="top">
         <img src="img/logo 1.png" /><ion-icon name="people" onclick="openSidebar()"></ion-icon>
     </div>
+    <div class="logInScreen">
+        <div class="logInContent">
+          <img src="img/logo 2.png" />
+          <div class="logInForm">
+            <input type="text" class="nameField" placeholder="Digite seu nome" /> <br />
+            <button onclick="logIn()">Entrar</button>
+          </div>
+          <div class="logInWorking">
+            <img src="img/giphy.gif" />  
+          </div>
+        </div>
+    </div>
     <div class="content">
     </div>
     <div class="bottom">
-        <input type="text" class="texto" placeholder="Escreva aqui..." /> <ion-icon name="paper-plane-outline" onclick="requestSendMessage()"></ion-icon>
+        <input type="text" class="messageField" placeholder="Escreva aqui..." /> <ion-icon name="paper-plane-outline" onclick="requestSendMessage()"></ion-icon>
         <span>Enviando para Todos (Público)</span>
     </div>
     <div class="sidebar" onclick="closeSidebar()"></div>

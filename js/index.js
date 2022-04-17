@@ -1,36 +1,55 @@
 let nameGlobal ={};
 function initializeMessages(){
-    logIn(prompt("Por favor insira seu lindo nome"));
+    document.querySelector(`.nameField`).addEventListener("keyup", enterLogIn);
+    formDisplayToggle(false);
 }
-function logIn(userName){
+function formDisplayToggle(hide){
+    if(hide===true){
+        document.querySelector(".logInWorking").style.display = 'flex';
+        document.querySelector(".logInForm").style.display = 'none';
+    }
+    else{
+        document.querySelector(".logInWorking").style.display = 'none';
+        document.querySelector(".logInForm").style.display = 'flex';
+    }
 
-    const logInObject = {name: userName }
+}
+function logIn(){
+    formDisplayToggle(true);
+    const logInObject = {name: 
+        document.querySelector(`.nameField`).value }
     const promisse=axios.post("https://mock-api.driven.com.br/api/v6/uol/participants",logInObject);
     promisse.then(logInSucces(logInObject));
     promisse.catch(logInError);
 }
 function logInError(error){
     if(error.response.status=="400"){
-        logIn(prompt("Este nome está em uso! insira outro"));
+        alert("Este nome está em uso! insira outro");
     }
     else{
         alert(`ERRO! Código: ${error.response.status} Mensagem: ${error.response.data}`)
     }
+    window.location.reload();
 }
 function logInSucces(userNameObject){
     nameGlobal=userNameObject;
+    document.querySelector(".logInScreen").style.display = 'none';
     requestMessages();
     setInterval(requestMessages,3000);
     requestUsers();
     setInterval(requestUsers, 10000);
-    document.querySelector(`.texto`).addEventListener("keydown", keypressEnter);
+    setInterval(keepConnection,4000);
+    document.querySelector(`.messageField`).addEventListener("keyup", enterSendMessage);
 }
 //requestMessages também mantem o usuario conectado
 function requestMessages(){
     const promisse= axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
     promisse.then(updateMessages);
     promisse.catch(catchError);
-    axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nameGlobal); 
+}
+function keepConnection(){
+    const promisse = axios.post("https://mock-api.driven.com.br/api/v6/uol/status", nameGlobal);
+    promisse.catch(catchError)
 }
 function updateMessages(messageLog){
     const content= document.querySelector(".content");
@@ -66,15 +85,21 @@ function updateMessages(messageLog){
     }
 }
 function catchError(erro) {
-	console.log("Erro " + erro.response.statuss);
+	console.log("Erro " + erro.response.status);
+    window.location.reload();
 }
-function keypressEnter(pressedkey){
+function enterSendMessage(pressedkey){
 if(pressedkey.code==="Enter"){
     requestSendMessage();
     }
 }
+function enterLogIn(pressedkey){
+    if(pressedkey.code==="Enter"){
+        logIn();
+        }
+    }
 function requestSendMessage(){
-    const messageField =document.querySelector(".bottom input");
+    const messageField =document.querySelector(".messageField");
     const messageTo= document.querySelector(`input[type="radio"][name="messageTo"]:checked`).value;
     const messageType= document.querySelector(`input[type="radio"][name="messageType"]:checked`).value;
     if(messageField.value){
@@ -96,7 +121,6 @@ function sendMessageSuccess(){
 function openSidebar(){
     document.querySelector(".sidebar").style.display="initial";
     document.querySelector(".sidebarContent").style.right="0";
-    console.log("aaaaa")
 }
 function closeSidebar(){
     document.querySelector(".sidebar").style.display="none";
